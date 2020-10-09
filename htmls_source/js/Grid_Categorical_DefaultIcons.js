@@ -68,8 +68,6 @@ $(document).ready(function(){
                 } 
             });
 
-            //console.log($cells);
-            //console.log(objGroups);
             console.log(objCats);
 
             $(".mrQuestionTable tbody tr:first").remove();
