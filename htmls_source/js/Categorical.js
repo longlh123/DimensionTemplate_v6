@@ -11,7 +11,6 @@ $(document).ready(function(){
     var cells = [];
 
     var iscatimages = $('.content').find('.categorical_imagineicons').length == 1;
-    //var iscatscales = $('.content').find('.categorical_scales').length == 1; 
 
     console.log(iscatimages);
 
@@ -71,8 +70,25 @@ $(document).ready(function(){
         
         $(span).addClass('cat-group');
 
-        if (iscatimages) $(span).addClass('cat-image');
-        //if (iscatscales) $(span).addClass('cat-scales');
+        if (iscatimages){
+            $(span).addClass('cat-image');
+        } else {
+            var $text = $(span).find('.mrMultipleText').length == 1 ? $(span).find('.mrMultipleText') : $(span).find('.mrSingleText');
+
+            var text = $text.html();
+            var regExp = new RegExp("<img.*?>");
+            
+            if(regExp.test(text)){
+                
+                var s1 = text.replace(regExp, "");
+                var s2 = text.replace(s1, "");
+
+                s1 = s1.replace(/<.*?(\/>)/, "");
+                s1 = s1.replace(/<.*?(>)/, "");
+                
+                $text.html("<div class='cat-image-container'><div class='cat-image-item'>" + s2 + "</div><div class='cat-image-item'>" + s1 + "</div></div>");
+            }
+        }
 
         $(span).children().each(function(){
 

@@ -209,8 +209,9 @@ $(document).ready(function(){
                             
                             var text = $(cell).find('.mrQuestionText').html();
                             var regExp = new RegExp("<img.*?>");
-                                        
+                            
                             if(regExp.test(text)){
+                                
                                 var s1 = text.replace(regExp, "");
                                 var s2 = text.replace(s1, "");
 
