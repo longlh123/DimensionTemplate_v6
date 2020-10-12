@@ -27,9 +27,22 @@ $(document).ready(function(){
             });
             
             $.each($cells, function(index, cell){
+                
+                var text = $(cell).find('.mrQuestionText').html();
+                var regExp = new RegExp("<img.*?>");
+                            
+                if(regExp.test(text)){
+                    var s1 = text.replace(regExp, "");
+                    var s2 = text.replace(s1, "");
+
+                    s1 = s1.replace(/<.*?(\/>)/, "");
+                    s1 = s1.replace(/<.*?(>)/, "");
+                    
+                    $(cell).find('.mrQuestionText').html("<div class='cat-image-container'><div class='cat-image-item'>" + s2 + "</div><div class='cat-image-item'>" + s1 + "</div></div>");
+                }
+                
                 switch(number_of_rows){
                     case 2:
-                        //parseInt($(cell).prop('id').split('.')[2])
                         if($(cell).prop('colspan') > 1 || ($(cell).prop('colspan') == 1 && $(cell).prop('rowspan') == 1 && parseInt($(cell).prop('id').split('.')[2]) == 0)){
                             objGroups[$(cell).prop('id')] = $(cell);
                         } else {
@@ -37,19 +50,6 @@ $(document).ready(function(){
                         }
                         break;
                     default:
-                        var text = $(cell).find('.mrQuestionText').html();
-                        var regExp = new RegExp("<img.*?>");
-                                    
-                        if(regExp.test(text)){
-                            var s1 = text.replace(regExp, "");
-                            var s2 = text.replace(s1, "");
-
-                            s1 = s1.replace(/<.*?(\/>)/, "");
-                            s1 = s1.replace(/<.*?(>)/, "");
-                            
-                            $(cell).find('.mrQuestionText').html("<div><div>" + s2 + "</div><div>" + s1 + "</div></div>");
-                        }
-
                         if($(cell).prop('colspan') > 1){
                             objGroups[$(cell).prop('id')] = $(cell);
                         } else {
@@ -195,7 +195,7 @@ $(document).ready(function(){
                         obj_subgroups = {};
                     }
                     
-                    $(cell).hide()
+                    $(cell).hide();
                 } else {
                     if($(cell).find('.mrQuestionText').length == 1){
                     
@@ -207,6 +207,19 @@ $(document).ready(function(){
                         } else {
                             $(cell).parent().addClass('grid-attr');
                             
+                            var text = $(cell).find('.mrQuestionText').html();
+                            var regExp = new RegExp("<img.*?>");
+                                        
+                            if(regExp.test(text)){
+                                var s1 = text.replace(regExp, "");
+                                var s2 = text.replace(s1, "");
+
+                                s1 = s1.replace(/<.*?(\/>)/, "");
+                                s1 = s1.replace(/<.*?(>)/, "");
+                                
+                                $(cell).find('.mrQuestionText').html("<div class='cat-image-container'><div class='cat-image-item'>" + s2 + "</div><div class='cat-image-item'>" + s1 + "</div></div>");
+                            }
+
                             if($(cell).find('.mrErrorText').length == 1){
                                 $(cell).find('.mrErrorText').hide();
                                 $(cell).parent().removeClass('bg-primary');

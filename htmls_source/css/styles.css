@@ -331,6 +331,17 @@ img{ width: 100%; }
     z-index: -1;
 }
 
+.cat-image-container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+}
+
+.cat-image-item{
+	flex: 1;
+}
+
 /* the open-end + categorical grid */
 .grid-container{
 	border-collapse: collapse;
